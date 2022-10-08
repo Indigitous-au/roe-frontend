@@ -16,5 +16,15 @@ services:
       - "8083:80"
     depends_on:
       - yjs-websocket-server
-  
+  caddy:
+    build: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - default
+      - roe
 
+networks:
+  roe:
+    external: true
