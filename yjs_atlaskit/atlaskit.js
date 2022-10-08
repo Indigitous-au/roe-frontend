@@ -17,7 +17,8 @@ import {
 window.addEventListener('load', () => {
   const ydoc = new Y.Doc()
   // const provider = new WebsocketProvider('wss://demos.yjs.dev', 'atlaskit-demo', ydoc)
-  const provider = new WebsocketProvider('ws://128.199.120.104:1234', 'atlaskit-roe-demo', ydoc)
+  // const provider = new WebsocketProvider('ws://128.199.120.104:1234', 'atlaskit-roe-demo', ydoc)
+  const provider = new WebsocketProvider('ws://' + document.location.host + '/y-websocket', 'atlaskit-roe-demo', ydoc)
   const yXmlFragment = ydoc.get('prosemirror-atlaskit', Y.XmlFragment)
 
   const connectBtn = document.getElementById('y-connect-btn')
