@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebRTC Chess</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>WebRTC Chess</a></h1>
+          <p>This is a multiplayer version of the classical game of chess. You
+            can start playing by sharing the below link with your opponent(or
+            opening it in a new browser window).</p>
+          <a id="link" class="hidden" href="#" target="_blank">Loading Link ...</a>
+          <div id="loading">
+            <div class="spinner"></div>
+          </div>
+          <p>Hosted on <a href="https://github.com/abhineet97/webrtc-chess">Github</a></p>
+        </div>
+      </header>
+      <div class="blur">
+        <div id="board"></div>
+        <div class="status"><b>Status: </b><span id="msg">Loading...</span></div>
+        <button id="report_button">eSafety Report</button>
+      </div>
+    </main>
+  </body>
+</html>
