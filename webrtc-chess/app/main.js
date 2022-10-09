@@ -4,6 +4,9 @@ import ChessBoard from './lib/chessboard/chessboard.js';
 import Peer from './lib/peer.js';
 import Chess from 'chess.js';
 
+import html2canvas from 'html2canvas';
+import Swal from 'sweetalert2';
+
 import './main.css';
 
 /**
@@ -196,7 +199,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const reportBtn = document.getElementById('report_button');
   reportBtn.addEventListener('click', () => {
     const context = JSON.stringify(game);
-    console.log('eSafety Report', context);
+    html2canvas(document.getElementById('board')).then(async (canvas) => {
+      const imgDataUrl = canvas.toDataURL();
+      const {isDismissed} = await Swal.fire({
+        title: 'Report',
+        showCancelButton: true,
+        imageUrl: imgDataUrl,
+        input: 'textarea',
+        inputPlaceholder: 'Optional: give description',
+      });
+
+      if (isDismissed) {
+        return;
+      }
+
+      const reportData = {
+        context: context,
+        imgDataUrl: imgDataUrl,
+      };
+      console.log('eSafety Report', reportData);
+
+      Swal.fire({
+        title: 'Reported',
+        icon: 'success'
+      });
+    });
   });
 
   peer.signal();
