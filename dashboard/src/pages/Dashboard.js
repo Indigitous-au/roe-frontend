@@ -13,13 +13,6 @@ import {
     Pagination,
 } from '@windmill/react-ui'
 
-import {
-    doughnutOptions,
-    lineOptions,
-    doughnutLegends,
-    lineLegends,
-} from '../utils/demo/chartsData'
-import Reports from "../utils/demo/tableData";
 import {Link} from "react-router-dom";
 
 function Dashboard({token}) {
