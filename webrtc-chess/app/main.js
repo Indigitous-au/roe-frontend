@@ -6,6 +6,7 @@ import Chess from 'chess.js';
 
 import html2canvas from 'html2canvas';
 import Swal from 'sweetalert2';
+import {GraphQLClient, gql} from 'graphql-request';
 
 import './main.css';
 
@@ -16,6 +17,53 @@ function loaded() {
   const loader = document.querySelector('#loading');
   loader.parentElement.removeChild(loader);
   document.querySelector('main').classList.remove('hidden');
+}
+
+/* eslint-disable max-len */
+/**
+ * Post some report to hasura
+ *
+ * @function
+ * @param {any} things the context object to build report from
+ */
+async function postReportGraphQL(things) {
+  const mutation = gql`
+  mutation MyMutation($platform: String, $username_report: String, $username_suspect: String, $ip_address: String, $screenshot: String) {
+    insert_report(objects: {platform: $platform, username_report: $username_report, username_suspect: $username_suspect, ip_address: $ip_address, screenshot: $screenshot}) {
+      # returning {
+      #   username_suspect
+      #   username_report
+      #   screenshot
+      #   platform
+      #   ip_address
+      #   created_datetime
+      # },
+      affected_rows
+    }
+  }
+  `;
+
+  /* eslint-enable max-len */
+
+  const ipAddr = await (await fetch("https://api.ipify.org?format=json")).json();
+  console.log({ipAddr})
+  const variables = {
+    'platform': 'chess-demo',
+    'username_report': '',
+    'username_suspect': '',
+    'ip_address': ipAddr.ip,
+    'screenshot': things.screenshot,
+  };
+  const endpoint = 'https://api.hack2022.drwaryaa.com/v1/graphql';
+  const graphQLClient = new GraphQLClient(endpoint, {
+    // headers: {
+    //   authorization: 'Bearer MY_TOKEN'
+    // }
+  });
+
+  const data = await graphQLClient.request(mutation, variables);
+
+  console.log('gql response', JSON.stringify(data, undefined, 2));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -215,13 +263,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const reportData = {
         context: context,
-        imgDataUrl: imgDataUrl,
+        screenshot: imgDataUrl,
       };
       console.log('eSafety Report', reportData);
 
+      postReportGraphQL(reportData);
+
       Swal.fire({
         title: 'Reported',
-        icon: 'success'
+        icon: 'success',
       });
     });
   });

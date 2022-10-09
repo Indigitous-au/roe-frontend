@@ -4,12 +4,13 @@
   "private": true,
   "dependencies": {
     "chess.js": "^0.10.3",
+    "graphql-request": "^5.0.0",
     "html2canvas": "^1.4.1",
     "simple-peer": "^9.6.2",
     "sweetalert2": "^11.4.38"
   },
   "scripts": {
-    "prebuild": "npm run lint",
+    "prebuild_nodont": "npm run lint",
     "build": "webpack -p",
     "lint": "eslint --fix app/*.js"
   },

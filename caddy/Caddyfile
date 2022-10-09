@@ -18,3 +18,7 @@ thebutton.hack2022.drwaryaa.com {
 api.hack2022.drwaryaa.com {
     reverse_proxy hasura:8080
 }
+
+dashboard.hack2022.drwaryaa.com {
+    reverse_proxy dashboard:80
+}
