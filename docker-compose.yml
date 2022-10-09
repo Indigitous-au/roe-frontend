@@ -7,7 +7,7 @@ services:
   thebutton:
     build: thebutton
     ports:
-      - "8084:8080"
+      - "8087:8080"
   yjs-websocket-server:
     build: y-websocket
     environment:
@@ -25,10 +25,15 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - "caddy_data:/data"
     networks:
       - default
       - roe
 
+volumes:
+  caddy_data:
+    external: true
 networks:
   roe:
     external: true
