@@ -20,6 +20,10 @@ services:
       - "8083:80"
     depends_on:
       - yjs-websocket-server
+  dashboard:
+    build: dashboard
+    ports:
+      - "8082:80"
   caddy:
     build: caddy
     ports:
