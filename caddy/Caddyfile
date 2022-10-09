@@ -11,9 +11,9 @@ chess.hack2022.drwaryaa.com {
     reverse_proxy chess-demo:8080
 }
 
-# prototype.hack2022.dryaryaa.com {
-#     reverse_proxy thebutton:80
-# }
+prototype.hack2022.dryaryaa.com {
+    reverse_proxy thebutton:80
+}
 
 api.hack2022.drwaryaa.com {
     reverse_proxy hasura:8080

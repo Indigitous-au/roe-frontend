@@ -4,6 +4,10 @@ services:
     build: webrtc-chess
     ports:
       - "8084:8080"
+  thebutton:
+    build: thebutton
+    ports:
+      - "8084:8080"
   yjs-websocket-server:
     build: y-websocket
     environment:

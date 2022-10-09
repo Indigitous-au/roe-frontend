@@ -1,12 +1,16 @@
 /* eslint-env browser */
 
+import 'regenerator-runtime/runtime'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as Y from 'yjs'
 import { WebsocketProvider } from 'y-websocket'
 import { ySyncPlugin, yCursorPlugin, yUndoPlugin, undo, redo } from 'y-prosemirror'
+import Swal from 'sweetalert2'
 
 import { keymap } from 'prosemirror-keymap'
+
+
 
 import {
   Editor,
@@ -32,10 +36,28 @@ window.addEventListener('load', () => {
   })
 
   const reportBtn = document.getElementById("report_button")
-  reportBtn.addEventListener('click', () => {
+  reportBtn.addEventListener('click', async () => {
     let reportContext = yXmlFragment.toJSON()
-    console.log("Reporting document context", reportContext);
     // TODO: hook into ROE library
+    let { value: description, isDismissed } = await Swal.fire({
+      input: 'textarea',
+      title: "Report Online Exploitation",
+      inputPlaceholder: 'Optional: describe what happened',
+      showCancelButton: true,
+      icon: "warning"
+    })
+    
+    if(isDismissed) { return; }
+
+    let reportData = {
+      documentContents: reportContext,
+      description
+    }
+    console.log("Reporting document context", reportData);
+    Swal.fire({
+      title: "Reported",
+      icon: "success"
+    })
   })
 
   /**

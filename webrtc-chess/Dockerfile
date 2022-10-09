@@ -4,7 +4,6 @@ COPY . .
 RUN go build
 
 FROM node:16.17.1
-# COPY --from=golang:1.13-alpine /usr/local/go/ /usr/local/go/
 WORKDIR /webrtcchess
 COPY . .
 RUN npm install
