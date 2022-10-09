@@ -39,7 +39,7 @@ window.addEventListener('load', () => {
   reportBtn.addEventListener('click', async () => {
     let reportContext = yXmlFragment.toJSON()
     // TODO: hook into ROE library
-    let { value: description } = await Swal.fire({
+    let { value: description, isDismissed } = await Swal.fire({
       input: 'textarea',
       title: "Report Online Exploitation",
       inputPlaceholder: 'Optional: describe what happened',
@@ -47,7 +47,7 @@ window.addEventListener('load', () => {
       icon: "warning"
     })
     
-    if(!description) { return; } // dialog was cancelled/dismissed
+    if(isDismissed) { return; }
 
     let reportData = {
       documentContents: reportContext,
