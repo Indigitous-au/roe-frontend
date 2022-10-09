@@ -46,7 +46,7 @@ function Header() {
             </div>
             <Input
               className="pl-8 text-gray-700"
-              placeholder="Search for projects"
+              placeholder="Search for report"
               aria-label="Search"
             />
           </div>
